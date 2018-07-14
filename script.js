@@ -198,3 +198,11 @@ function enemyHitsPlayer (player,bullet) {
 function descend() {
 	aliens.y += 10;
 }
+
+function restart() {
+	lives.callAll('revive');
+	aliens.removeAll();
+	createAliens();
+	ship.revive();
+	stateText.visible = false;
+}
