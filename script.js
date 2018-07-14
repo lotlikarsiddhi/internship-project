@@ -25,6 +25,7 @@ function create(){
 }
 
 function update(){
+	ship.body.velocity.x = 0;
 	if(cursor.left.isDown){
 		console.log("left pressed")
 		ship.body.velocity.x = -25;
