@@ -28,10 +28,10 @@ function update(){
 	ship.body.velocity.x = 0;
 	if(cursor.left.isDown){
 		console.log("left pressed")
-		ship.body.velocity.x = -25;
+		ship.body.velocity.x = -75;
 	}
 	else if(cursor.right.isDown){
 		console.log("right pressed")
-		ship.body.velocity.x = +25;
+		ship.body.velocity.x = +75;
 	}
 }
