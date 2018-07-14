@@ -22,6 +22,10 @@ var enemyBullet;
 var explosions;
 var livingEnemies = [];
 var lives;
+var score = 0;
+var scoreString = '';
+var scoreText;
+var stateText;
 
 function preload(){
 	game.load.image("sky", "assets/invaders/sky.png")
@@ -83,6 +87,9 @@ function create(){
         shipLife.angle = 90;
         shipLife.alpha = 0.4;
     }
+
+    scoreString = 'Score : ';
+    scoreText = game.add.text(10, 10, scoreString + score, { font: '34px Arial', fill: '#fff' });
 }
 
 
@@ -119,6 +126,11 @@ function update(){
  		}
  	}
  }
+
+ function resetBullet (bullet) {
+    bullet.kill();
+
+}
 
  function createAliens(){
     for(var y=0;y<4;y++){
@@ -163,11 +175,18 @@ function setupInvader (invader) {
 function collisionHandler (bullet, alien) {
     bullet.kill();
     alien.kill();
+
+    score += 10;
+    scoreText.text = scoreString + score;
+
     var explosion = explosions.getFirstExists(false);
     explosion.reset(alien.body.x, alien.body.y);
     explosion.play('kaboom', 30, false, true);
     if (aliens.countLiving() == 0)
     {
+
+    	score += 1000;
+    	scoreText.text = scoreString + score;
         enemyBullets.callAll('kill',this);
         stateText.text = " You Won, \n Click to restart";
         stateText.visible = true;
