@@ -11,20 +11,26 @@ var game = new Phaser.Game(
 	)
 var ship;
 var cursor;
+var sky;
+var fireButton;
 function preload(){
 	game.load.image("sky", "assets/invaders/sky.png")
 	game.load.image("ship", "assets/invaders/player.png")
 }
 
 function create(){
-	game.add.tileSprite(0, 0, 800, 600 ,'sky')
-    ship = game.add.sprite(375, 300 ,'ship')
+	sky = game.add.tileSprite(0, 0, 800, 600 ,'sky')
+    ship = game.add.sprite(400, 500 ,'ship')
+    ship.anchor.setTo(0.5, 0.5)
     game.physics.arcade.enable(ship)
     ship.body.collideWorldBounds = true;
     cursor = game.input.keyboard.createCursorKeys()
+
+    fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 }
 
 function update(){
+	sky.tilePosition.y += 2
 	ship.body.velocity.x = 0;
 	if(cursor.left.isDown){
 		console.log("left pressed")
@@ -34,4 +40,11 @@ function update(){
 		console.log("right pressed")
 		ship.body.velocity.x = +75;
 	}
+	if(fireButton.isDown){
+		shipFire();
+	}
 }
+
+ function shipFire(){
+ 	console.log("Bullet was fired")
+ }
